@@ -23,10 +23,11 @@ Maven搭建SpringMVC+Spring+MyBatis框架，将陆续集成新功能
 
 2. **MAVEN引入jar包**
 
-    当前为最基础的jar包，将其引入pom.xml文件中。此时，project中原先报错的index.jsp页面，错误消失。这是因为添加了servlet-api，为project添加了Servlet依赖。附上代码，如下：
+    当前为最基础的jar包，将其引入pom.xml文件中，附上代码，如下：
 ```
 
 ```
+此时，project中原先报错的index.jsp页面，错误消失。这是因为添加了servlet-api，为project添加了Servlet依赖。
 
 3. **配置conf下的配置文件**
 
@@ -68,7 +69,6 @@ Maven搭建SpringMVC+Spring+MyBatis框架，将陆续集成新功能
 ```
 
 4.   **修改web.xml**
-
 ```
 <?xml version="1.0" encoding="UTF-8"?>
 <web-app xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance"
@@ -76,8 +76,7 @@ Maven搭建SpringMVC+Spring+MyBatis框架，将陆续集成新功能
 ```
 
 5.  **新建jsp文件**
-
-    在WEB-INF文件夹下新增 view/hello.jsp,如下：
+  * 在WEB-INF文件夹下新增 view/hello.jsp,如下：
 ```
 <%@ page language="java" contentType="text/html; charset=UTF-8"
 	pageEncoding="UTF-8"%>
@@ -95,7 +94,7 @@ Maven搭建SpringMVC+Spring+MyBatis框架，将陆续集成新功能
 
 6. **新建controller文件**
 
-    com.ssm.controller包下新增 IndexController.java,如下：
+  * com.ssm.controller包下新增 IndexController.java,如下：
 
 ```
 package com.ssm.controller;

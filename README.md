@@ -23,11 +23,11 @@ Maven搭建SpringMVC+Spring+MyBatis框架，将陆续集成新功能
 
 2. **MAVEN引入jar包**
 
-    当前为最基础的jar包，将其引入pom.xml文件中，附上代码，如下：
+    当前为最基础的jar包，将其引入pom.xml文件中。此时，project中原先报错的index.jsp页面，错误消失。这是因为添加了servlet-api，为project添加了Servlet依赖。附上代码，如下：
 ```
 
 ```
-此时，project中原先报错的index.jsp页面，错误消失。这是因为添加了servlet-api，为project添加了Servlet依赖。
+
 
 3. **配置conf下的配置文件**
 

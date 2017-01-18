@@ -17,10 +17,10 @@ Maven搭建SpringMVC+Spring+MyBatis框架，将陆续集成新功能
 - **搭建基础工程目录**
     * 在src/main/java文件夹中，新建包（如下）
       * com.ssm.model(存放javabean类),
-        com.ssm.dao（存放spring与mybatis连接接口）,
-        com.ssm.service（存放service接口类）,
-        com.ssm.service.impl（存放service接口的实现类），
-        com.ssm.controller（存放控制层controller）
+      * com.ssm.dao（存放spring与mybatis连接接口）,
+      * com.ssm.service（存放service接口类）,
+      * com.ssm.service.impl（存放service接口的实现类），
+      * com.ssm.controller（存放控制层controller）
     * 在src/main/resource文件夹中，新建包conf（存放配置文件），
     * 在src/test/java文件夹中，新建包com.ssm.test(存放测试文件)
 
@@ -56,7 +56,7 @@ Maven搭建SpringMVC+Spring+MyBatis框架，将陆续集成新功能
 ```
 
 - **新建jsp文件**
-  在WEB-INF文件夹下新增 view/hello.jsp,如下：
+	* 在WEB-INF文件夹下新增 view/hello.jsp,如下：
 ```
 <%@ page language="java" contentType="text/html; charset=UTF-8"
 	pageEncoding="UTF-8"%>
@@ -73,7 +73,7 @@ Maven搭建SpringMVC+Spring+MyBatis框架，将陆续集成新功能
 ```
 
 - **新建controller文件**
-com.ssm.controller包下新增 IndexController.java,如下：
+	* com.ssm.controller包下新增 IndexController.java,如下：
 
 ```
 package com.ssm.controller;
@@ -93,6 +93,8 @@ public class IndexController {
 
 - **运行项目**
   * 当前结构如下图所示，基本骨架已经出来了。如下图：
+  
 ![](https://raw.githubusercontent.com/jiangcaijun/pictureAsset/HEAD/src/ssm_20170114/2017-01-18_004214.png)
  * 可用tomcat或jetty运行该项目，输入url：http://127.0.0.1:8080/ssm_20170114/hello，可见下图，证明spring框架搭建成功。
+ 
 ![](https://raw.githubusercontent.com/jiangcaijun/pictureAsset/HEAD/src/ssm_20170114/2017-01-18_004028.png)

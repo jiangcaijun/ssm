@@ -1,5 +1,6 @@
 # ssm
 Maven搭建SpringMVC+Spring+MyBatis框架，将陆续集成新功能
+
 ---
 ## 2017-01-14
 - **Maven工程创建**
@@ -10,6 +11,7 @@ Maven搭建SpringMVC+Spring+MyBatis框架，将陆续集成新功能
 - **此时，项目结构如下图**
 ![](https://raw.githubusercontent.com/jiangcaijun/pictureAsset/HEAD/src/ssm_20170114/2017-01-16_104235.png)
 ---
+
 ## 2017-01-17
 
 - **搭建基础工程目录**
@@ -23,7 +25,7 @@ Maven搭建SpringMVC+Spring+MyBatis框架，将陆续集成新功能
     * 在src/test/java文件夹中，新建包com.ssm.test(存放测试文件)
 
 - **MAVEN引入jar包**
-    当前为最基础的jar包，将其引入pom.xml文件中，附上代码，如下：
+	* 当前为最基础的jar包，将其引入pom.xml文件中，附上代码，如下：
 ```
 <project xmlns="http://maven.apache.org/POM/4.0.0" xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance"
 	xsi:schemaLocation="http://maven.apache.org/POM/4.0.0 
@@ -32,7 +34,7 @@ Maven搭建SpringMVC+Spring+MyBatis框架，将陆续集成新功能
 	</build>
 </project>
 ```
-此时，project中原先报错的index.jsp页面，错误消失。这是因为添加了servlet-api，为project添加了Servlet依赖。
+	* 此时，project中原先报错的index.jsp页面，错误消失。这是因为添加了servlet-api，为project添加了Servlet依赖。
 
 - **配置conf下的配置文件**
 

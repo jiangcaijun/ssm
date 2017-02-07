@@ -1,7 +1,7 @@
 <project xmlns="http://maven.apache.org/POM/4.0.0" xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance"
-	xsi:schemaLocation="http://maven.apache.org/POM/4.0.0 http://maven.apache.org/maven-v4_0_0.xsd">
+		 xsi:schemaLocation="http://maven.apache.org/POM/4.0.0 http://maven.apache.org/maven-v4_0_0.xsd">
 	<modelVersion>4.0.0</modelVersion>
-	<groupId>cn.springmvc</groupId>
+	<groupId>com.ssm</groupId>
 	<artifactId>ssm_20170114</artifactId>
 	<packaging>war</packaging>
 	<version>0.0.1-SNAPSHOT</version>
@@ -18,7 +18,7 @@
 		<log4j.version>1.2.9</log4j.version>
 	</properties>
 
-	<!-- 解决One or more constraints have not been satisfied问题，如无该问题，可删除 -->
+	<!-- 解决One or more constraints have not been satisfied问题 -->
 	<profiles>
 		<profile>
 			<id>jdk-1.7</id>
@@ -50,79 +50,85 @@
 		</dependency>
 
 		<!-- spring核心包 -->
+		<!-- springframe start -->
 		<dependency>
 			<groupId>org.springframework</groupId>
 			<artifactId>spring-core</artifactId>
 			<version>${spring.version}</version>
 		</dependency>
+
 		<dependency>
 			<groupId>org.springframework</groupId>
 			<artifactId>spring-web</artifactId>
 			<version>${spring.version}</version>
 		</dependency>
+
 		<dependency>
 			<groupId>org.springframework</groupId>
 			<artifactId>spring-oxm</artifactId>
 			<version>${spring.version}</version>
 		</dependency>
+
 		<dependency>
 			<groupId>org.springframework</groupId>
 			<artifactId>spring-tx</artifactId>
 			<version>${spring.version}</version>
 		</dependency>
+
 		<dependency>
 			<groupId>org.springframework</groupId>
 			<artifactId>spring-jdbc</artifactId>
 			<version>${spring.version}</version>
 		</dependency>
+
 		<dependency>
 			<groupId>org.springframework</groupId>
 			<artifactId>spring-webmvc</artifactId>
 			<version>${spring.version}</version>
 		</dependency>
+
 		<dependency>
 			<groupId>org.springframework</groupId>
 			<artifactId>spring-aop</artifactId>
 			<version>${spring.version}</version>
 		</dependency>
+
 		<dependency>
 			<groupId>org.springframework</groupId>
 			<artifactId>spring-context-support</artifactId>
 			<version>${spring.version}</version>
 		</dependency>
+
 		<dependency>
 			<groupId>org.springframework</groupId>
 			<artifactId>spring-aop</artifactId>
 			<version>${spring.version}</version>
 		</dependency>
+
 		<dependency>
 			<groupId>org.springframework</groupId>
 			<artifactId>spring-test</artifactId>
 			<version>${spring.version}</version>
 		</dependency>
-		<!-- spring核心包 end -->
-		
+		<!-- springframe end -->
 		<!-- mybatis核心包 -->
 		<dependency>
 			<groupId>org.mybatis</groupId>
 			<artifactId>mybatis</artifactId>
 			<version>${mybatis.version}</version>
 		</dependency>
-		
 		<!-- mybatis/spring包 -->
 		<dependency>
 			<groupId>org.mybatis</groupId>
 			<artifactId>mybatis-spring</artifactId>
 			<version>1.2.2</version>
 		</dependency>
-		
 		<!-- mysql驱动包 -->
 		<dependency>
 			<groupId>mysql</groupId>
 			<artifactId>mysql-connector-java</artifactId>
 			<version>5.1.29</version>
 		</dependency>
-		
 		<!-- 添加Servlet依赖的jar -->
 		<dependency>
 			<groupId>javax.servlet</groupId>
@@ -130,7 +136,6 @@
 			<version>2.5</version>
 			<scope>provided</scope>
 		</dependency>
-		
 		<!-- 阿里巴巴数据源包 -->
 		<dependency>
 			<groupId>com.alibaba</groupId>
@@ -156,8 +161,8 @@
 			<artifactId>jstl</artifactId>
 			<version>1.2</version>
 		</dependency>
-		
-		<!-- 日志log start -->
+		<!-- 日志文件管理包 -->
+		<!-- log start -->
 		<dependency>
 			<groupId>log4j</groupId>
 			<artifactId>log4j</artifactId>
@@ -174,7 +179,11 @@
 			<version>${slf4j.version}</version>
 		</dependency>
 		<!-- log end -->
-		
+<!--		<dependency>
+			<groupId> org.aspectj</groupId>
+			<artifactId> aspectjweaver</artifactId>
+			<version> 1.6.11</version>
+		</dependency>-->
 		<!-- 支持 ${pageContext.request.contextPath} -->
 		<dependency>
 			<groupId>javax.servlet.jsp</groupId>
@@ -184,5 +193,18 @@
 	</dependencies>
 	<build>
 		<finalName>ssm_20170114</finalName>
+		<!-- 解決 idea中spring + mybatis整合，配置扫描*Mapper.xml路径后，无法扫描映射文件问题 -->
+		<!-- 这样也可以把所有的xml文件，打包到相应位置,参考http://blog.csdn.net/miaoy220/article/details/53447277。-->
+		<resources>
+			<resource>
+				<directory>src/main/java</directory>
+				<includes>
+					<include>**/*.properties</include>
+					<include>**/*.xml</include>
+				</includes>
+				<filtering>false</filtering>
+			</resource>
+		</resources>
 	</build>
+
 </project>

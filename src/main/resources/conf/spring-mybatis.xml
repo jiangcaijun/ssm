@@ -1,0 +1,105 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<beans xmlns="http://www.springframework.org/schema/beans"
+	xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance" xmlns:p="http://www.springframework.org/schema/p"
+	xmlns:context="http://www.springframework.org/schema/context"
+	xmlns:aop="http://www.springframework.org/schema/aop" xmlns:tx="http://www.springframework.org/schema/tx"
+	xmlns:util="http://www.springframework.org/schema/util"
+	xsi:schemaLocation="http://www.springframework.org/schema/beans
+    http://www.springframework.org/schema/beans/spring-beans-3.2.xsd
+    http://www.springframework.org/schema/context
+    http://www.springframework.org/schema/context/spring-context-3.2.xsd
+    http://www.springframework.org/schema/tx
+    http://www.springframework.org/schema/tx/spring-tx-3.2.xsd
+    http://www.springframework.org/schema/aop
+    http://www.springframework.org/schema/aop/spring-aop-3.2.xsd
+    http://www.springframework.org/schema/util 
+    http://www.springframework.org/schema/util/spring-util-3.2.xsd">
+
+	<bean id="dataSource" class="com.alibaba.druid.pool.DruidDataSource"
+		init-method="init" destroy-method="close">
+		<property name="driverClassName">
+			<value>${jdbc_driverClassName}</value>
+		</property>
+		<property name="url">
+			<value>${jdbc_url}</value>
+		</property>
+		<property name="username">
+			<value>${jdbc_username}</value>
+		</property>
+		<property name="password">
+			<value>${jdbc_password}</value>
+		</property>
+		<!-- 连接池最大使用连接数 -->
+		<property name="maxActive">
+			<value>20</value>
+		</property>
+		<!-- 初始化连接大小 -->
+		<property name="initialSize">
+			<value>1</value>
+		</property>
+		<!-- 获取连接最大等待时间 -->
+		<property name="maxWait">
+			<value>60000</value>
+		</property>
+		<!-- 连接池最大空闲 -->
+		<property name="maxIdle">
+			<value>20</value>
+		</property>
+		<!-- 连接池最小空闲 -->
+		<property name="minIdle">
+			<value>3</value>
+		</property>
+		<!-- 自动清除无用连接 -->
+		<property name="removeAbandoned">
+			<value>true</value>
+		</property>
+		<!-- 清除无用连接的等待时间 -->
+		<property name="removeAbandonedTimeout">
+			<value>180</value>
+		</property>
+		<!-- 连接属性 -->
+		<property name="filters" value="config,wall,stat" />
+		<property name="connectionProperties">
+			<value>config.decrypt=true;config.decrypt.key=${jdbc_publickey}</value>
+		</property>
+	</bean>
+
+	<!-- mybatis文件配置，扫描所有mapper文件 -->
+	<!-- p:configLocation加载mybatis的配置文件 -->
+	<!-- p:mapperLocations自动扫描model目录中的映射xml文件，省去了在config中手工配置 -->
+	<bean id="sqlSessionFactory" class="org.mybatis.spring.SqlSessionFactoryBean"
+		p:dataSource-ref="dataSource" 
+		p:configLocation="classpath:conf/mybatis-config.xml"
+		p:mapperLocations="classpath:com/ssm/mapper/*.xml" /><!-- configLocation为mybatis属性
+		mapperLocations为所有mapper -->
+
+	<!-- spring与mybatis整合配置，扫描所有dao -->
+	<!-- 对Dao 接口动态实现，需要知道接口在哪  -->
+	<bean class="org.mybatis.spring.mapper.MapperScannerConfigurer"
+		p:basePackage="com.ssm.dao" p:sqlSessionFactoryBeanName="sqlSessionFactory" />
+
+	<!-- 对数据源进行事务管理 -->
+	<bean id="transactionManager"
+		class="org.springframework.jdbc.datasource.DataSourceTransactionManager">  
+		<property name="dataSource" ref="dataSource" />
+	</bean> 
+	
+	<tx:advice id="transactionAdvice"  transaction-manager="transactionManager"> 
+	<tx:attributes>  
+		<tx:method name="save*" propagation="REQUIRED" /> 
+		<tx:method name="update*" propagation="REQUIRED" /> 
+		<tx:method name="delete*" propagation="REQUIRED" /> 
+		<tx:method name="insert*" propagation="REQUIRED" /> 
+		<tx:method name="load*" propagation="SUPPORTS" /> 
+		<tx:method name="find*" propagation="SUPPORTS" /> 
+		<tx:method name="list*" propagation="SUPPORTS" /> 
+		<tx:method name="check*" propagation="SUPPORTS" />   
+		<tx:method name="*" propagation="SUPPORTS" /> 
+	</tx:attributes>
+	</tx:advice> 
+	<aop:config>  
+		<aop:pointcut id="transactionPointcut" expression="execution(* com.ssm.service.*.*(..))" />
+		<aop:advisor pointcut-ref="transactionPointcut" advice-ref="transactionAdvice" /> 
+	</aop:config>
+	
+</beans>

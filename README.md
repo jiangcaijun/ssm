@@ -849,4 +849,6 @@ public User testPOJO(Model model) {
 }
 ```
 
-此时，访问 http://localhost:8080/ssm_20170114/user/user 即可正常访问了
+此时，访问 http://localhost:8080/ssm_20170114/user/user 即可正常访问了。框架结构如下（IDE由Eclipse转为idea）：
+
+![maven + spring + spring MVC + mybatis项目项目结构图](https://raw.githubusercontent.com/jiangcaijun/pictureAsset/HEAD/src/ssm_20170114/2017-03-28.png)

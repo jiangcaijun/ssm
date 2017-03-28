@@ -4,8 +4,7 @@ import com.ssm.model.User;
 
 public interface UserService {
 	public int insert(User user);
-	
-	
+
 	/**
 	* @Description: 根据id获取user
 	* @param @param id

@@ -39,8 +39,7 @@
 		<dependency>
 			<groupId>junit</groupId>
 			<artifactId>junit</artifactId>
-			<version>3.8.1</version>
-			<scope>test</scope>
+			<version>4.12</version>
 		</dependency>
 		<!-- 与junit配套使用 -->
 		<dependency>
@@ -179,11 +178,11 @@
 			<version>${slf4j.version}</version>
 		</dependency>
 		<!-- log end -->
-<!--		<dependency>
+		<dependency>
 			<groupId> org.aspectj</groupId>
 			<artifactId> aspectjweaver</artifactId>
 			<version> 1.6.11</version>
-		</dependency>-->
+		</dependency>
 		<!-- 支持 ${pageContext.request.contextPath} -->
 		<dependency>
 			<groupId>javax.servlet.jsp</groupId>

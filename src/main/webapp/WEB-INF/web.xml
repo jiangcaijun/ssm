@@ -12,12 +12,6 @@
 			classpath:conf/spring-mybatis.xml
 		</param-value>
 	</context-param>
-	<!-- 设计路径变量值 -->
-	<context-param>
-		<param-name>webAppRootKey</param-name>
-		<param-value>springmvc.root</param-value>
-	</context-param>
-
 
 	<!-- Spring字符集过滤器 -->
 	<filter>

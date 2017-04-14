@@ -8,10 +8,30 @@
 	<!-- 读取spring配置文件 -->
 	<context-param>
 		<param-name>contextConfigLocation</param-name>
-		<param-value>classpath:conf/spring.xml;
-			classpath:conf/spring-mybatis.xml
+		<param-value>classpath:conf/spring.xml
 		</param-value>
 	</context-param>
+
+	<!--Spring上下文监听器 -->
+	<listener>
+		<listener-class>org.springframework.web.context.ContextLoaderListener</listener-class>
+	</listener>
+
+	<!--Shiro过滤器 -->
+	<filter>
+		<filter-name>shiroFilter</filter-name>
+		<filter-class>org.springframework.web.filter.DelegatingFilterProxy</filter-class>
+		<init-param>
+			<param-name>targetFilterLifecycle</param-name>
+			<param-value>true</param-value>
+		</init-param>
+	</filter>
+	<filter-mapping>
+		<filter-name>shiroFilter</filter-name>
+		<url-pattern>/*</url-pattern>
+		<dispatcher>REQUEST</dispatcher>
+		<dispatcher>FORWARD</dispatcher>
+	</filter-mapping>
 
 	<!-- Spring字符集过滤器 -->
 	<filter>
@@ -30,6 +50,7 @@
 		<filter-name>SpringEncodingFilter</filter-name>
 		<url-pattern>/*</url-pattern>
 	</filter-mapping>
+
 
 	<!-- 多个项目在同一个tomcat下时，要考虑webAppRootKey -->
 	<context-param>
@@ -50,10 +71,6 @@
 	</context-param>
 	<listener>
 		<listener-class>org.springframework.web.util.Log4jConfigListener</listener-class>
-	</listener>
-
-	<listener>
-		<listener-class>org.springframework.web.context.ContextLoaderListener</listener-class>
 	</listener>
 
 	<!-- springMVC核心配置 -->

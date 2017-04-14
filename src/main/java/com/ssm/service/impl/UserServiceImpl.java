@@ -19,7 +19,12 @@ public class UserServiceImpl implements UserService {
 	}
 
 	@Override
-	public User getUser(int id) {
+	public User getUser(String id) {
 		return usermapper.selectByPrimaryKey(id);
+	}
+
+	@Override
+	public User findUserByUserId(String username) {
+		return usermapper.findUserByUserId(username);
 	}
 }

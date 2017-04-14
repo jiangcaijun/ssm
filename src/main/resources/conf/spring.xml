@@ -12,5 +12,7 @@
 
 	<!-- 扫描文件（自动将servicec层注入） -->
 	<context:component-scan base-package="com.ssm.service" />
-	
+
+	<import resource="classpath:conf/shiro/spring-shiro.xml"/>
+	<import resource="classpath:conf/spring-mybatis.xml"/>
 </beans>

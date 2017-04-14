@@ -3,7 +3,7 @@
 <mapper namespace="com.ssm.dao.UserMapper">
 <!-- 这里用User而不是com.ssm.model.User(用它也是可以的)，是spring-mybatis别名 -->
   <resultMap id="BaseResultMap" type="User">
-    <id column="id" jdbcType="INTEGER" property="id" />
+    <id column="id" jdbcType="VARCHAR" property="id" />
     <result column="user_name" jdbcType="VARCHAR" property="userName" />
     <result column="password" jdbcType="VARCHAR" property="password" />
     <result column="age" jdbcType="INTEGER" property="age" />
@@ -11,21 +11,29 @@
   <sql id="Base_Column_List">
     id, user_name, password, age
   </sql>
-  <select id="selectByPrimaryKey" parameterType="java.lang.Integer" resultMap="BaseResultMap">
+  <select id="selectByPrimaryKey" parameterType="java.lang.String" resultMap="BaseResultMap">
     select 
     <include refid="Base_Column_List" />
     from user_t
-    where id = #{id,jdbcType=INTEGER}
+    where id = #{id}
   </select>
-  <delete id="deleteByPrimaryKey" parameterType="java.lang.Integer">
+
+  <select id="findUserByUserId" parameterType="java.lang.String" resultMap="BaseResultMap">
+    select
+    <include refid="Base_Column_List" />
+    from user_t
+    where user_name = #{userName}
+  </select>
+
+  <delete id="deleteByPrimaryKey" parameterType="java.lang.String">
     delete from user_t
-    where id = #{id,jdbcType=INTEGER}
+    where id = #{id,jdbcType=VARCHAR}
   </delete>
   <insert id="insert" parameterType="com.ssm.model.User">
     insert into user_t (id, user_name, password, 
       age)
-    values (#{id,jdbcType=INTEGER}, #{userName,jdbcType=VARCHAR}, #{password,jdbcType=VARCHAR}, 
-      #{age,jdbcType=INTEGER})
+    values (#{id}, #{userName}, #{password},
+      #{age})
   </insert>
   <insert id="insertSelective" parameterType="com.ssm.model.User">
     insert into user_t
@@ -45,7 +53,7 @@
     </trim>
     <trim prefix="values (" suffix=")" suffixOverrides=",">
       <if test="id != null">
-        #{id,jdbcType=INTEGER},
+        #{id,jdbcType=VARCHAR},
       </if>
       <if test="userName != null">
         #{userName,jdbcType=VARCHAR},
@@ -71,13 +79,13 @@
         age = #{age,jdbcType=INTEGER},
       </if>
     </set>
-    where id = #{id,jdbcType=INTEGER}
+    where id = #{id,jdbcType=VARCHAR}
   </update>
   <update id="updateByPrimaryKey" parameterType="com.ssm.model.User">
     update user_t
     set user_name = #{userName,jdbcType=VARCHAR},
       password = #{password,jdbcType=VARCHAR},
       age = #{age,jdbcType=INTEGER}
-    where id = #{id,jdbcType=INTEGER}
+    where id = #{id,jdbcType=VARCHAR}
   </update>
 </mapper>

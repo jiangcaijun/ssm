@@ -5,6 +5,7 @@ import javax.annotation.Resource;
 import com.ssm.model.User;
 import com.ssm.service.UserService;
 import org.apache.log4j.Logger;
+import org.apache.shiro.authz.annotation.RequiresPermissions;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.beans.factory.annotation.Qualifier;
 import org.springframework.stereotype.Controller;
@@ -16,7 +17,8 @@ import org.springframework.web.bind.annotation.ResponseBody;
 import com.alibaba.fastjson.JSONObject;
 
 @Controller
-@RequestMapping("/user")
+@RequestMapping("/manage/user")
+@RequiresPermissions(value = { "/manage/user" })
 public class UserController {
 	private static final Logger LOG = Logger.getLogger(UserController.class);
 
@@ -39,6 +41,7 @@ public class UserController {
 	 *
 	 * @return
 	 */
+	@RequiresPermissions(value = { "/manage/user/user" })
 	@RequestMapping(value = "/user", method = RequestMethod.GET)
 	public String userManager(Model model) {
 		String id = "1";

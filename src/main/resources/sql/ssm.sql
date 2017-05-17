@@ -16,10 +16,10 @@ Date: 2017-04-14 13:57:56
 SET FOREIGN_KEY_CHECKS=0;
 
 -- ----------------------------
--- Table structure for user_t
+-- Table structure for t_user
 -- ----------------------------
-DROP TABLE IF EXISTS `user_t`;
-CREATE TABLE `user_t` (
+DROP TABLE IF EXISTS `t_user`;
+CREATE TABLE `t_user` (
   `id` varchar(11) NOT NULL,
   `user_name` varchar(40) NOT NULL,
   `password` varchar(255) NOT NULL,
@@ -28,8 +28,8 @@ CREATE TABLE `user_t` (
 ) ENGINE=InnoDB DEFAULT CHARSET=utf8;
 
 -- ----------------------------
--- Records of user_t
+-- Records of t_user
 -- ----------------------------
-INSERT INTO `user_t` VALUES ('1', '测试名d', 'sfasgfaf', '24');
-INSERT INTO `user_t` VALUES ('3', 'admin', 'admin', '22');
-INSERT INTO `user_t` VALUES ('4', '事物1', 'adminadmin', '22');
+INSERT INTO `t_user` VALUES ('1', '测试名d', 'sfasgfaf', '24');
+INSERT INTO `t_user` VALUES ('3', 'admin', 'admin', '22');
+INSERT INTO `t_user` VALUES ('4', '事物1', 'adminadmin', '22');

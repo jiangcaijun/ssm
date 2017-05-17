@@ -69,9 +69,19 @@ public class LoginController extends BaseController{
             logger.error("未知错误,请联系管理员：{}", e);
             return renderError("未知错误,请联系管理员");
         }
-        //得到更新信息 end
-        User user = userService.findUserByUserId(username);
+        return renderSuccess();
+    }
 
+    /**
+     * 退出
+     *
+     * @return {Result}
+     */
+    @RequestMapping(value = "/logout", method = RequestMethod.POST)
+    @ResponseBody
+    public Object logout(String userID) {
+        Subject subject = SecurityUtils.getSubject();
+        subject.logout();
         return renderSuccess();
     }
 

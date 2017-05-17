@@ -14,29 +14,29 @@
   <select id="selectByPrimaryKey" parameterType="java.lang.String" resultMap="BaseResultMap">
     select 
     <include refid="Base_Column_List" />
-    from user_t
+    from t_user
     where id = #{id}
   </select>
 
   <select id="findUserByUserId" parameterType="java.lang.String" resultMap="BaseResultMap">
     select
     <include refid="Base_Column_List" />
-    from user_t
+    from t_user
     where user_name = #{userName}
   </select>
 
   <delete id="deleteByPrimaryKey" parameterType="java.lang.String">
-    delete from user_t
+    delete from t_user
     where id = #{id,jdbcType=VARCHAR}
   </delete>
   <insert id="insert" parameterType="com.ssm.model.User">
-    insert into user_t (id, user_name, password, 
+    insert into t_user (id, user_name, password, 
       age)
     values (#{id}, #{userName}, #{password},
       #{age})
   </insert>
   <insert id="insertSelective" parameterType="com.ssm.model.User">
-    insert into user_t
+    insert into t_user
     <trim prefix="(" suffix=")" suffixOverrides=",">
       <if test="id != null">
         id,
@@ -67,7 +67,7 @@
     </trim>
   </insert>
   <update id="updateByPrimaryKeySelective" parameterType="com.ssm.model.User">
-    update user_t
+    update t_user
     <set>
       <if test="userName != null">
         user_name = #{userName,jdbcType=VARCHAR},
@@ -82,7 +82,7 @@
     where id = #{id,jdbcType=VARCHAR}
   </update>
   <update id="updateByPrimaryKey" parameterType="com.ssm.model.User">
-    update user_t
+    update t_user
     set user_name = #{userName,jdbcType=VARCHAR},
       password = #{password,jdbcType=VARCHAR},
       age = #{age,jdbcType=INTEGER}

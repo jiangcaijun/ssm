@@ -18,7 +18,7 @@
     where id = #{id}
   </select>
 
-  <select id="findUserByUserId" parameterType="java.lang.String" resultMap="BaseResultMap">
+  <select id="findUserByUserName" parameterType="java.lang.String" resultMap="BaseResultMap">
     select
     <include refid="Base_Column_List" />
     from t_user

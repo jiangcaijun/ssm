@@ -1,7 +1,9 @@
 package com.ssm.controller;
 
+import com.ssm.annotation.Log;
 import com.ssm.model.User;
 import com.ssm.service.UserService;
+import com.ssm.utils.ConstantVar;
 import org.apache.log4j.Logger;
 import org.apache.shiro.SecurityUtils;
 import org.apache.shiro.authc.*;
@@ -39,6 +41,7 @@ public class LoginController extends BaseController{
         return "manage/login";
     }
 
+    @Log(value = "登录操作", entry = { "username=用户名" })
     @RequestMapping(value = "/loginPost", method = RequestMethod.POST)
     @ResponseBody
     public Object loginPost(String username, String password) {
@@ -69,6 +72,9 @@ public class LoginController extends BaseController{
             logger.error("未知错误,请联系管理员：{}", e);
             return renderError("未知错误,请联系管理员");
         }
+        User user = userService.findUserByUserName(username);
+
+        subject.getSession().setAttribute(ConstantVar.LOGIN_USER, user);
         return renderSuccess();
     }
 
@@ -77,12 +83,15 @@ public class LoginController extends BaseController{
      *
      * @return {Result}
      */
+    @Log(value = "用户退出操作")
     @RequestMapping(value = "/logout", method = RequestMethod.POST)
     @ResponseBody
-    public Object logout(String userID) {
+    public Object logout() {
         Subject subject = SecurityUtils.getSubject();
+        //从session中获取当前登录用户的User对象
+        User loginUser = (User) subject.getSession().getAttribute(ConstantVar.LOGIN_USER);
         subject.logout();
-        return renderSuccess();
+        return renderSuccess(loginUser.getUserName());
     }
 
     @RequiresPermissions(value = { "/user/userInformation" })

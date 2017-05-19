@@ -13,5 +13,5 @@ public interface UserService {
 	*/
 	User getUser(String id);
 
-	User findUserByUserId(String username);
+	User findUserByUserName(String username);
 }

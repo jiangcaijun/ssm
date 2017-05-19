@@ -114,6 +114,12 @@
 			<artifactId>spring-test</artifactId>
 			<version>${spring.version}</version>
 		</dependency>
+
+		<!--<dependency>
+			<groupId>org.springframework</groupId>
+			<artifactId>spring-aspects</artifactId>
+			<version>${spring.version}</version>
+		</dependency>-->
 		<!-- springframe end -->
 		<!-- mybatis核心包 -->
 		<dependency>

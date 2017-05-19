@@ -852,3 +852,79 @@ public User testPOJO(Model model) {
 此时，访问 http://localhost:8080/ssm_20170114/user/user 即可正常访问了。框架结构如下（IDE由Eclipse转为idea）：
 
 ![maven + spring + spring MVC + mybatis项目项目结构图](https://raw.githubusercontent.com/jiangcaijun/pictureAsset/HEAD/src/ssm_20170114/2017-03-28.png)
+
+## 2017-05-01(采用shiro，实现用户的登录与权限控制等)
+
+### 1、添加spring-shiro.xml和ehcache-shiro.xml
+
+spring-shiro.xml：shiro主配置文件：
+```
+<?xml version="1.0" encoding="UTF-8"?>
+<beans xmlns="http://www.springframework.org/schema/beans"
+	   xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance"
+	   xsi:schemaLocation="http://www.springframework.org/schema/beans http://www.springframework.org/schema/beans/spring-beans-3.2.xsd"
+	   default-lazy-init="true">
+
+	<description>Shiro安全配置</description>
+
+	<!-- 項目自定义的Realm -->
+	<bean id="userShiroRealm" class="com.ssm.shiro.UserShiroRealm" />
+
+	<!--安全管理器 -->
+	<bean id="securityManager" class="org.apache.shiro.web.mgt.DefaultWebSecurityManager">
+		<!--设置自定义Realm -->
+		<property name="realm" ref="userShiroRealm" />
+		<!--将缓存管理器，交给安全管理器 -->
+		<property name="cacheManager" ref="shiroEhcacheManager" />
+	</bean>
+
+	<!-- Shiro Filter -->
+	<bean id="shiroFilter" class="org.apache.shiro.spring.web.ShiroFilterFactoryBean">
+		<!-- 安全管理器 -->
+		<property name="securityManager" ref="securityManager" />
+		<!-- 默认的登陆访问url -->
+		<property name="loginUrl" value="/manage/login" />
+		<!-- 没有权限跳转的url -->
+		<property name="unauthorizedUrl" value="/unauth"/>
+		<!-- 自定义filter配置 -->
+		<property name="filters">
+			<map>
+				<!-- 将自定义 的FormAuthenticationFilter注入shiroFilter中 -->
+			</map>
+		</property>
+		<property name="filterChainDefinitions">
+			<value>
+				/manage/login = anon<!-- 不需要认证 可以理解为匿名用户或游客 -->
+				/manage/loginPost = anon<!-- 不需要认证 可以理解为匿名用户或游客 -->
+				/guest/** = anon
+				/manage/** = authc
+			</value>
+		</property>
+	</bean>
+
+	<!-- 用户授权信息Cache, 采用EhCache -->
+	<bean id="shiroEhcacheManager" class="org.apache.shiro.cache.ehcache.EhCacheManager">
+		<property name="cacheManagerConfigFile" value="classpath:conf/shiro/ehcache-shiro.xml" />
+	</bean>
+
+	<!-- 在方法中 注入 securityManager ，进行代理控制 -->
+	<bean class="org.springframework.beans.factory.config.MethodInvokingFactoryBean">
+		<property name="staticMethod"
+				  value="org.apache.shiro.SecurityUtils.setSecurityManager" />
+		<property name="arguments" ref="securityManager" />
+	</bean>
+
+	<!-- 保证实现了Shiro内部lifecycle函数的bean执行 -->
+	<bean id="lifecycleBeanPostProcessor" class="org.apache.shiro.spring.LifecycleBeanPostProcessor" />
+
+	<!-- AOP式方法级权限检查 -->
+	<bean class="org.springframework.aop.framework.autoproxy.DefaultAdvisorAutoProxyCreator"
+			depends-on="lifecycleBeanPostProcessor" />
+
+	<!-- 启用shrio授权注解拦截方式 -->
+	<bean class="org.apache.shiro.spring.security.interceptor.AuthorizationAttributeSourceAdvisor">
+		<property name="securityManager" ref="securityManager" />
+	</bean>
+</beans>
+
+```

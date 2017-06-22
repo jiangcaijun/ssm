@@ -7,12 +7,14 @@
       http://www.springframework.org/schema/context
       http://www.springframework.org/schema/context/spring-context.xsd">
 
-	<!-- 引入jdbc配置文件 -->
-	<context:property-placeholder location="classpath:jdbc.properties" />
+	<!-- 引入jdbc、redis等配置文件 -->
+	<context:property-placeholder location="classpath:*.properties" />
 
 	<!-- 扫描文件（自动将servicec层注入） -->
 	<context:component-scan base-package="com.ssm.service" />
 
 	<import resource="classpath:conf/shiro/spring-shiro.xml"/>
 	<import resource="classpath:conf/spring-mybatis.xml"/>
+	<import resource="classpath:conf/spring-redis.xml"/>
+
 </beans>

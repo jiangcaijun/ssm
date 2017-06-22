@@ -153,12 +153,20 @@
 			<version>1.0.2</version>
 		</dependency>
 
-		<!-- json数据 -->
+		<!-- config redis data and client jar-->
 		<dependency>
-			<groupId>org.codehaus.jackson</groupId>
-			<artifactId>jackson-mapper-asl</artifactId>
-			<version>1.9.4</version>
+			<groupId>org.springframework.data</groupId>
+			<artifactId>spring-data-redis</artifactId>
+			<version>1.7.1.RELEASE</version>
 		</dependency>
+
+		<dependency>
+			<groupId>redis.clients</groupId>
+			<artifactId>jedis</artifactId>
+			<version>2.8.1</version>
+		</dependency>
+
+		<!-- json数据 -->
 		<dependency>
 			<groupId>com.alibaba</groupId>
 			<artifactId>fastjson</artifactId>
@@ -222,7 +230,13 @@
 			<artifactId>lombok</artifactId>
 			<version>1.16.8</version>
 		</dependency>
-	</dependencies>
+		<!-- quartz 定时 -->
+		<dependency>
+			<groupId>org.quartz-scheduler</groupId>
+			<artifactId>quartz</artifactId>
+			<version>2.2.1</version>
+		</dependency>
+    </dependencies>
 	<build>
 		<finalName>ssm_20170114</finalName>
 		<!-- 解決 idea中spring + mybatis整合，配置扫描*Mapper.xml路径后，无法扫描映射文件问题 -->

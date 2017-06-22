@@ -9,8 +9,10 @@ import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.beans.factory.annotation.Qualifier;
 import org.springframework.beans.propertyeditors.CustomDateEditor;
 import org.springframework.web.bind.ServletRequestDataBinder;
+import org.springframework.web.bind.annotation.ExceptionHandler;
 import org.springframework.web.bind.annotation.InitBinder;
 
+import javax.servlet.http.HttpServletRequest;
 import java.text.SimpleDateFormat;
 import java.util.Date;
 
@@ -19,7 +21,6 @@ import java.util.Date;
  */
 public abstract class BaseController {
     protected final Logger logger = LoggerFactory.getLogger(getClass());
-
     @InitBinder
     public void initBinder(ServletRequestDataBinder binder) {
         /**

@@ -114,9 +114,9 @@ public class LogAspect {
 				if (loginUser != null) {
 					operLog.setUserId(loginUser.getId());
 					operLog.setUserName(loginUser.getUserName());
-					operLog.setOperStatus(ConstantVar.OPER_LOG_STATUS_SUCCESS);
+					operLog.setOperStatus(ConstantVar.OPER_LOG_STATUS.OPER_LOG_STATUS_SUCCESS_4ENUM.getValue());
 				} else {
-					operLog.setOperStatus(ConstantVar.OPER_LOG_STATUS_FAIL);
+					operLog.setOperStatus(ConstantVar.OPER_LOG_STATUS.OPER_LOG_STATUS_FAIL_4ENUM.getValue());
 				}
 			}else if (request.getRequestURI().contains("/logout")
 					&& "logout".equalsIgnoreCase(joinPoint.getSignature().getName())) {
@@ -138,7 +138,7 @@ public class LogAspect {
 
 			}
 			if(new Integer(operLog.getOperStatus())!=null){
-                operLog.setOperStatus(ConstantVar.OPER_LOG_STATUS_SUCCESS);
+                operLog.setOperStatus(ConstantVar.OPER_LOG_STATUS.OPER_LOG_STATUS_SUCCESS_4ENUM.getValue());
             }
             operLog.setClientIp(IPAddressUtil.getIpAddress(request));
             operLog.setReqUrl(request.getRequestURI());

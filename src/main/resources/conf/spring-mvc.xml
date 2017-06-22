@@ -45,6 +45,9 @@
 	<!-- 日志注解 -->
 	<bean id="LogAspect" class="com.ssm.annotation.LogAspect"/>
 
+	<!-- redis缓存注解 -->
+	<bean id="RedisAspect" class="com.ssm.annotation.RedisAspect"/>
+
 	<!-- 异常捕获aop -->
 	<bean id="exceptionHandler" class="com.ssm.aop.ExceptionHandler" />
 

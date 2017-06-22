@@ -5,6 +5,7 @@ import com.ssm.model.OperLog;
 import com.ssm.model.User;
 import com.ssm.service.LogService;
 import com.ssm.utils.IPAddressUtil;
+import com.ssm.utils.Result;
 import org.apache.commons.lang3.StringUtils;
 import org.apache.log4j.Logger;
 import org.apache.shiro.SecurityUtils;
@@ -22,7 +23,7 @@ import java.lang.reflect.Method;
 /**
  * aop：异常处理
  */
-public class ExceptionHandler implements ThrowsAdvice {
+public class ExceptionHandler implements ThrowsAdvice{
     private static final Logger LOG = Logger.getLogger(ExceptionHandler.class);
 
     @Autowired
@@ -66,6 +67,7 @@ public class ExceptionHandler implements ThrowsAdvice {
             operEvent.append("。Exception类型为：");
             operEvent.append(e.getClass());
             descr4Exception = createExceptionDetail(e);
+            LOG.error(descr4Exception);
 
             Subject curUser = SecurityUtils.getSubject();
             if (request.getRequestURI().contains("/logout")
@@ -101,6 +103,11 @@ public class ExceptionHandler implements ThrowsAdvice {
             ex.printStackTrace();
             LOG.error("log保存数据库失败");
         }
+
+//        if(false){  //ResponseBody
+//
+//            return renderError("数据错误了，ExceptionHandler");
+//        }
     }
 
     /**
@@ -112,6 +119,7 @@ public class ExceptionHandler implements ThrowsAdvice {
      * @2016-8-18 下午5:43:20
      */
     private String createExceptionDetail(Exception e) {
+        e.printStackTrace();
         StackTraceElement[] stackTraceArray = e.getStackTrace();
         StringBuilder detail = new StringBuilder();
         for (int i = 0; i < stackTraceArray.length; i++) {
@@ -122,5 +130,16 @@ public class ExceptionHandler implements ThrowsAdvice {
             detail.append(stackTraceArray[i] + "\r\n");
         }
         return detail.toString();
+    }
+
+    /**
+     * ajax失败
+     * @param msg 失败的消息
+     * @return {Object}
+     */
+    private Object renderError(String msg) {
+        Result result = new Result();
+        result.setMsg(msg);
+        return result;
     }
 }

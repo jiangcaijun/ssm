@@ -2,6 +2,7 @@ package com.ssm.controller;
 
 import javax.annotation.Resource;
 
+import com.ssm.annotation.Redis;
 import com.ssm.model.User;
 import com.ssm.service.UserService;
 import org.apache.log4j.Logger;
@@ -18,8 +19,7 @@ import com.alibaba.fastjson.JSONObject;
 
 @Controller
 @RequestMapping("/manage/user")
-@RequiresPermissions(value = { "/manage/user" })
-public class UserController {
+public class UserController extends BaseController{
 	private static final Logger LOG = Logger.getLogger(UserController.class);
 
 
@@ -59,13 +59,13 @@ public class UserController {
 	 * @return String    返回类型
 	 * @throws
 	 */
+	@Redis
 	@RequestMapping(value = "/testAjax", method = RequestMethod.POST)
 	@ResponseBody
-	public String test(Model model) {
+	public Object test(Model model) {
 		JSONObject jsonObject = new JSONObject();
-		jsonObject.put("id","数据拿到了");
-
-		return jsonObject.toString();
+		jsonObject.put("id","数据拿到123了");
+		return renderSuccess(jsonObject.toJSONString());
 	}
 	/**
 	 * @Title: testPOJO

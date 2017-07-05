@@ -14,10 +14,6 @@
 	http://www.springframework.org/schema/aop
     http://www.springframework.org/schema/aop/spring-aop-3.2.xsd">
 
-	<!-- 扫描controller（controller层注入） -->
-	<context:component-scan base-package="com.ssm.controller" />
-	<context:component-scan base-package="com.ssm.service.impl"/>
-
 	<!-- 避免IE在ajax请求时，返回json出现下载 -->
 	<bean id="jacksonMessageConverter"
 		class="org.springframework.http.converter.json.MappingJacksonHttpMessageConverter">
@@ -36,7 +32,6 @@
 	</bean>
 	
 	<!-- 配置哪些是静态资源，缺省Servlet 直接返回 -->
-    <mvc:annotation-driven/>
 	<mvc:resources mapping="/static/**/" location="/static/"/>
 
 	<!-- 启动对@AspectJ注解的支持 -->

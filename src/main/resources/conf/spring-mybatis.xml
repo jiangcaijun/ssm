@@ -41,10 +41,6 @@
 		<property name="maxWait">
 			<value>60000</value>
 		</property>
-		<!-- 连接池最大空闲 -->
-		<property name="maxIdle">
-			<value>20</value>
-		</property>
 		<!-- 连接池最小空闲 -->
 		<property name="minIdle">
 			<value>3</value>
@@ -60,7 +56,7 @@
 		<!-- 连接属性 -->
 		<property name="filters" value="config,wall,stat" />
 		<property name="connectionProperties">
-			<value>config.decrypt=true;config.decrypt.key=${jdbc_publickey}</value>
+			<value></value>
 		</property>
 	</bean>
 

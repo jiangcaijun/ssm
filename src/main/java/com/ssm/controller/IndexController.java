@@ -2,12 +2,10 @@ package com.ssm.controller;
 
 import com.ssm.annotation.Log;
 import com.ssm.annotation.Redis;
-import com.ssm.redis.RedisPool;
 import com.ssm.redis.RedisUtil;
 import org.apache.commons.lang3.StringUtils;
 import org.apache.log4j.Logger;
 import org.springframework.beans.factory.annotation.Autowired;
-import org.springframework.beans.factory.annotation.Qualifier;
 import org.springframework.stereotype.Controller;
 import org.springframework.ui.Model;
 import org.springframework.web.bind.annotation.RequestMapping;
@@ -61,7 +59,6 @@ public class IndexController {
 		} catch (Exception e) {
 			e.printStackTrace();
 		}
-
 		return "guest/guestIndex";
 	}
 	

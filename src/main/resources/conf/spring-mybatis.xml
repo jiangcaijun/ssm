@@ -78,10 +78,13 @@
 	<bean id="transactionManager"
 		class="org.springframework.jdbc.datasource.DataSourceTransactionManager">  
 		<property name="dataSource" ref="dataSource" />
-	</bean> 
-	
-	<tx:advice id="transactionAdvice"  transaction-manager="transactionManager"> 
-	<tx:attributes>  
+	</bean>
+
+	<!-- 註解式事務的支持 -->
+	<tx:annotation-driven transaction-manager="transactionManager" order="0"/>
+
+	<tx:advice id="transactionAdvice"  transaction-manager="transactionManager" >
+	<tx:attributes>
 		<tx:method name="save*" propagation="REQUIRED" /> 
 		<tx:method name="update*" propagation="REQUIRED" /> 
 		<tx:method name="delete*" propagation="REQUIRED" /> 
@@ -92,10 +95,12 @@
 		<tx:method name="check*" propagation="SUPPORTS" />   
 		<tx:method name="*" propagation="SUPPORTS" /> 
 	</tx:attributes>
-	</tx:advice> 
+	</tx:advice>
+
+	<!-- 服務事務註冊切面 -->
 	<aop:config>  
 		<aop:pointcut id="transactionPointcut" expression="execution(* com.ssm.service.*.*(..))" />
-		<aop:advisor pointcut-ref="transactionPointcut" advice-ref="transactionAdvice" /> 
+		<aop:advisor pointcut-ref="transactionPointcut" advice-ref="transactionAdvice" order="1"/>
 	</aop:config>
 	
 </beans>

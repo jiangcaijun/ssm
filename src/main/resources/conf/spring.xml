@@ -15,18 +15,30 @@
     http://www.springframework.org/schema/aop/spring-aop-3.2.xsd">
 
 	<!-- 引入jdbc配置文件 -->
-	<context:property-placeholder location="classpath:jdbc.properties,classpath:activeMQ.properties" />
-
-	<mvc:annotation-driven/>
-	<!-- 扫描controller（controller层注入） -->
-	<context:component-scan base-package="com.ssm.controller" />
-	<context:component-scan base-package="com.ssm.service.impl"/>
-	<!-- 扫描文件（自动将servicec层注入） -->
-	<context:component-scan base-package="com.ssm.service" />
-	<context:component-scan base-package="com.ssm.mq" />
+	<context:property-placeholder location="
+		classpath:jdbc.properties,
+		classpath:redis.properties,
+		classpath:activeMQ.properties" />
 
 	<import resource="classpath:conf/shiro/spring-shiro.xml"/>
 	<import resource="classpath:conf/spring-mybatis.xml"/>
 	<import resource="classpath:conf/spring-ActiveMQ.xml"/>
     <import resource="classpath:conf/spring-redis.xml"/>
+
+	<mvc:annotation-driven/>
+
+	<context:component-scan base-package="com.ssm" />
+
+	<!-- 启动对@AspectJ注解的支持 -->
+	<aop:aspectj-autoproxy proxy-target-class="true"/>
+
+	<!-- 日志注解 -->
+	<bean id="logAspect" class="com.ssm.annotation.LogAspect" />
+
+	<!-- 异常注解 -->
+	<bean id="exceptionAspect" class="com.ssm.annotation.ExceptionAspect"/>
+
+	<!-- redis缓存注解 -->
+	<bean id="redisAspect" class="com.ssm.annotation.RedisAspect"/>
+
 </beans>

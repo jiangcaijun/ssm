@@ -27,30 +27,11 @@
 	<!-- 对模型视图添加前后缀 -->
 	<bean id="viewResolver"
 		class="org.springframework.web.servlet.view.InternalResourceViewResolver">
-		<property name="prefix" value="/WEB-INF/jsp/" />
+		<property name="prefix" value="/WEB-INF/view/" />
 		<property name="suffix" value=".jsp" />
 	</bean>
 	
 	<!-- 配置哪些是静态资源，缺省Servlet 直接返回 -->
 	<mvc:resources mapping="/static/**/" location="/static/"/>
-
-	<!-- 启动对@AspectJ注解的支持 -->
-	<aop:aspectj-autoproxy proxy-target-class="true"/>
-
-	<!-- 日志注解 -->
-	<bean id="LogAspect" class="com.ssm.annotation.LogAspect"/>
-
-	<!-- redis缓存注解 -->
-	<bean id="RedisAspect" class="com.ssm.annotation.RedisAspect"/>
-
-	<!-- 异常捕获aop -->
-	<bean id="exceptionHandler" class="com.ssm.aop.ExceptionHandler" />
-
-	<aop:config>
-		<aop:aspect ref="exceptionHandler">
-			<aop:pointcut id="exceptionService" expression="execution(* com.ssm.*.*.*(..))" />
-			<aop:after-throwing pointcut-ref="exceptionService" method="afterThrowing" throwing="e"/>
-		</aop:aspect>
-	</aop:config>
 
 </beans>

@@ -22,7 +22,7 @@
 		<!-- 安全管理器 -->
 		<property name="securityManager" ref="securityManager" />
 		<!-- 默认的登陆访问url -->
-		<property name="loginUrl" value="/manage/login" />
+		<property name="loginUrl" value="/guest/login" />
 		<!-- 没有权限跳转的url -->
 		<property name="unauthorizedUrl" value="/unauth"/>
 		<!-- 自定义filter配置 -->
@@ -33,8 +33,6 @@
 		</property>
 		<property name="filterChainDefinitions">
 			<value>
-				/manage/login = anon<!-- 不需要认证 可以理解为匿名用户或游客 -->
-				/manage/loginPost = anon<!-- 不需要认证 可以理解为匿名用户或游客 -->
 				/guest/** = anon
 				/manage/** = authc
 			</value>
@@ -58,7 +56,9 @@
 
 	<!-- AOP式方法级权限检查 -->
 	<bean class="org.springframework.aop.framework.autoproxy.DefaultAdvisorAutoProxyCreator"
-			depends-on="lifecycleBeanPostProcessor" />
+		  depends-on="lifecycleBeanPostProcessor">
+		<property name="proxyTargetClass" value="true"/>
+	</bean>
 
 	<!-- 启用shrio授权注解拦截方式 -->
 	<bean class="org.apache.shiro.spring.security.interceptor.AuthorizationAttributeSourceAdvisor">

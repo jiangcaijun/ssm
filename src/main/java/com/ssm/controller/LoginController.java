@@ -22,7 +22,6 @@ import org.springframework.web.bind.annotation.ResponseBody;
  * Created by jiangcaijun on 2017/3/29.
  */
 @Controller
-@RequestMapping("/manage")
 public class LoginController extends BaseController{
     private static final Logger LOG = Logger.getLogger(LoginController.class);
 
@@ -35,14 +34,13 @@ public class LoginController extends BaseController{
      *
      * @return {String}
      */
-    @RequestMapping(value = "/login", method = RequestMethod.GET)
+    @RequestMapping(value = "/guest/login", method = RequestMethod.GET)
     public String login(Model model) {
-        LOG.info("进入manage/login");
-        return "manage/login";
+        return "guest/login";
     }
 
     @Log(value = "登录操作", entry = { "username=用户名" })
-    @RequestMapping(value = "/loginPost", method = RequestMethod.POST)
+    @RequestMapping(value = "/guest/loginPost", method = RequestMethod.POST)
     @ResponseBody
     public Object loginPost(String username, String password) {
         if (StringUtils.isBlank(username)) {
@@ -75,7 +73,7 @@ public class LoginController extends BaseController{
         User user = userService.findUserByUserName(username);
 
         subject.getSession().setAttribute(ConstantVar.LOGIN_USER, user);
-        return renderSuccess();
+        return renderSuccess("登录成功");
     }
 
     /**
@@ -88,16 +86,8 @@ public class LoginController extends BaseController{
     @ResponseBody
     public Object logout() {
         Subject subject = SecurityUtils.getSubject();
-        //从session中获取当前登录用户的User对象
-        User loginUser = (User) subject.getSession().getAttribute(ConstantVar.LOGIN_USER);
         subject.logout();
-        return renderSuccess(loginUser.getUserName());
+        return renderSuccess("退出成功");
     }
 
-    @RequiresPermissions(value = { "/user/userInformation" })
-    @RequestMapping(value = "/userInformation", method = RequestMethod.GET)
-    public String userInformation(Model model) {
-        LOG.info("进入manage/userInformation");
-        return "manage/userInformation";
-    }
 }

@@ -17,6 +17,8 @@ import org.springframework.web.bind.annotation.ResponseBody;
 
 import com.alibaba.fastjson.JSONObject;
 
+import static jdk.nashorn.internal.runtime.regexp.joni.Config.log;
+
 @Controller
 @RequestMapping("/manage/user")
 public class UserController extends BaseController{
@@ -44,10 +46,6 @@ public class UserController extends BaseController{
 	@RequiresPermissions(value = { "/manage/user/user" })
 	@RequestMapping(value = "/user", method = RequestMethod.GET)
 	public String userManager(Model model) {
-		String id = "1";
-		User user = userService.getUser(id);
-		model.addAttribute("user", user);
-		LOG.info(user.toString());
 		return "user/showUser";
 	}
 
@@ -69,7 +67,6 @@ public class UserController extends BaseController{
 	}
 	/**
 	 * @Title: testPOJO
-	 * @Description: TODO 这里没有在xml中启动Spring MVC的注解功能，却依然可以完成请求和注解POJO的映射
 	 * @param @param model
 	 * @param @return    参数
 	 * @return String    返回类型
@@ -77,9 +74,9 @@ public class UserController extends BaseController{
 	 */
 	@RequestMapping(value = "/testPOJO", method = RequestMethod.POST)
 	@ResponseBody
-	public User testPOJO(Model model) {
+	public Object testPOJO(Model model) {
 		String id = "1";
 		User user = userService.getUser(id);
-		return user;
+		return renderSuccess(user);
 	}
 }

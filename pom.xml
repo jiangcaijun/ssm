@@ -10,7 +10,7 @@
 
 	<properties>
 		<!-- spring版本号 -->
-		<spring.version>3.2.4.RELEASE</spring.version>
+		<spring.version>4.0.2.RELEASE</spring.version>
 		<!-- mybatis版本号 -->
 		<mybatis.version>3.2.4</mybatis.version>
 		<!-- log4j日志文件管理包版本 -->
@@ -248,6 +248,13 @@
 			<groupId>org.springframework</groupId>
 			<artifactId>spring-jms</artifactId>
 			<version>${spring.version}</version>
+		</dependency>
+		<!--XBean是Apache Geronimo的子项目，设计这个的目的是为了能为Geronimo的插件提供一种方便快捷的配置方式。
+		后来，Xbean被更多的开源项目引用。例如：jetty、Activemq等等，同时xbean也提供了对spring的支持。-->
+		<dependency>
+			<groupId>org.apache.xbean</groupId>
+			<artifactId>xbean-spring</artifactId>
+			<version>3.18</version>
 		</dependency>
 
 	</dependencies>

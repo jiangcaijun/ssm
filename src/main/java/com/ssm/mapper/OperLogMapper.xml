@@ -23,7 +23,7 @@
 		<selectKey resultType="java.lang.Long" keyProperty="id" order="AFTER">
 			SELECT LAST_INSERT_ID()
 		</selectKey>
-		insert into t_operlog (user_id, user_name, oper_time,
+		insert into t_log (user_id, user_name, oper_time,
 		client_ip,req_url,method, oper_event,oper_status,log_desc)
 		values
 		(#{userId,jdbcType=VARCHAR}, #{userName,jdbcType=VARCHAR}, now(),

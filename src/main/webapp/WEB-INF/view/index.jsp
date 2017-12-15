@@ -8,8 +8,25 @@
 </head>
 <body>
 <h1>这是WEB-INF/view/目录下的index.jsp</h1>
+<p><span>requestHashCode = </span><span id="requestHashCode"></span>
 <p><a href="">游客页面</a></p>
 <p><a href="guest/login">登录页面</a></p>
 <p><a href="activeMQTest">activeMq测试页面</a></p>
 </body>
+<script type="text/javascript" src="<%=request.getContextPath() %>/static/js/common/jquery-1.12.1.min.js"></script>
+<script type="text/javascript">
+    $(function () {
+        $.ajax({
+            type: "POST",
+            url: $ctx + "/testRequestHashCode",
+            data: {
+            },
+            success: function (data) {
+                var dataMsg = eval("("+data.msg+")");
+                $("#requestHashCode").html(dataMsg.requestHashCode);
+            }
+        });
+
+    });
+</script>
 </html>

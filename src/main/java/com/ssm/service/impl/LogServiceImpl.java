@@ -19,7 +19,7 @@ import javax.servlet.http.HttpServletRequest;
 import java.io.IOException;
 import java.lang.reflect.Method;
 
-@Service
+@Service(value="logService")
 public class LogServiceImpl implements LogService {
 
     private static final Logger LOG = Logger.getLogger(LogServiceImpl.class);

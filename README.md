@@ -28,7 +28,6 @@
 ---
 ## 2017-05-15(添加spring与redis整合)
 
-
 地址：[SSM框架_5（spring与redis整合） - 开源小菜鸟2333](https://my.oschina.net/u/3136014/blog/993998)
 
 ---
@@ -39,11 +38,14 @@
 
 ---
 
-
-
-
 ## 2017-06-17(spring+ (activeMQ) 实现queue与topic)
 
 地址：[spring+ (activeMQ) 实现queue与topic - 开源小菜鸟2333](https://my.oschina.net/u/3136014/blog/1021839)
+
+---
+
+## 2017-12-15(HttpServletRequest的线程安全问题)
+
+地址：[HttpServletRequest利用 autowire 注入，线程安全问题 - 开源小菜鸟2333](https://my.oschina.net/u/3136014/blog/1590499)
 
 ---

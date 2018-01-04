@@ -2,10 +2,10 @@
 		 xsi:schemaLocation="http://maven.apache.org/POM/4.0.0 http://maven.apache.org/maven-v4_0_0.xsd">
 	<modelVersion>4.0.0</modelVersion>
 	<groupId>com.ssm</groupId>
-	<artifactId>ssm_20170114</artifactId>
+	<artifactId>ssm</artifactId>
 	<packaging>war</packaging>
 	<version>0.0.1-SNAPSHOT</version>
-	<name>ssm_20170114 Maven Webapp</name>
+	<name>ssm Maven Webapp</name>
 	<url>http://maven.apache.org</url>
 
 	<properties>
@@ -22,16 +22,16 @@
 	<!-- 解决One or more constraints have not been satisfied问题 -->
 	<profiles>
 		<profile>
-			<id>jdk-1.7</id>
+			<id>jdk-1.8</id>
 			<!-- 另外一种激活方式 -->
 			<activation>
 				<activeByDefault>true</activeByDefault>
-				<jdk>1.7</jdk>
+				<jdk>1.8</jdk>
 			</activation>
 			<properties>
-				<maven.compiler.source>1.7</maven.compiler.source>
-				<maven.compiler.target>1.7</maven.compiler.target>
-				<maven.compiler.compilerVersion>1.7</maven.compiler.compilerVersion>
+				<maven.compiler.source>1.8</maven.compiler.source>
+				<maven.compiler.target>1.8</maven.compiler.target>
+				<maven.compiler.compilerVersion>1.8</maven.compiler.compilerVersion>
 			</properties>
 		</profile>
 	</profiles>
@@ -259,7 +259,17 @@
 
 	</dependencies>
 	<build>
-		<finalName>ssm_20170114</finalName>
+		<finalName>ssm</finalName>
+		<plugins>
+			<plugin>
+				<groupId>org.apache.maven.plugins</groupId>
+				<artifactId>maven-compiler-plugin</artifactId>
+				<configuration>
+					<source>1.8</source>
+					<target>1.8</target>
+				</configuration>
+			</plugin>
+		</plugins>
 		<!-- 解決 idea中spring + mybatis整合，配置扫描*Mapper.xml路径后，无法扫描映射文件问题 -->
 		<!-- 这样也可以把所有的xml文件，打包到相应位置,参考http://blog.csdn.net/miaoy220/article/details/53447277。-->
 		<resources>
